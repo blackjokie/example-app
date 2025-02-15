@@ -9,7 +9,7 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    environment: PLAYGROUND
+    environment: Playground
 
     steps:
       # 1. Check out the repository.
@@ -28,7 +28,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/example-app
+          images: ${{ secrets.DOCKERHUBUSERNAME }}/example-app
           # The "type=semver" option interprets the Git tag as a semantic version.
           # The pattern "{{version}}" uses the tag value as-is (e.g. "1.0.0").
           tags: |
@@ -39,8 +39,8 @@ jobs:
         id: docker_login
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          username: ${{ secrets.DOCKERHUBUSERNAME }}
+          password: ${{ secrets.DOCKERHUBPASSWORD }}
 
       # 5. Build and push the Docker image.
       #    It uses your Dockerfile (ideally a multi-stage build for Golang apps)
